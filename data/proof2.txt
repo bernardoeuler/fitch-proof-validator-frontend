@@ -1,0 +1,7 @@
+A>B;A>C
+A>(B^C)
+NS;A
+NL;B;>E1,3
+NL;C;>E2,3
+NL;B^C;^I4,5
+FL;A>(B^C);>I3-6

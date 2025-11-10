@@ -4,8 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
-with open("proof4.txt", "r") as f:
-    lines = f.readlines()
+with open("proof4.txt", "r") as file:
+    lines = file.readlines()
     premises = lines[0].strip().split(";") if lines[0].strip() != "" else []
     conclusion = lines[1].strip()
     proof = [line.strip().split(";") if len(line.strip().split(";")) == 3 else [*line.strip().split(";"), ""] for line in lines[2:] if line.strip() != ""]
@@ -38,6 +38,13 @@ WebDriverWait(driver, 30).until(
 
 result = driver.find_element(By.CLASS_NAME, "resultsdiv").text
 proof = driver.find_element(By.ID, "theproof")
+
+full_page_height = proof.get_property('scrollHeight')
+full_page_width = proof.get_property('scrollWidth')
+print(full_page_width, full_page_height)
+driver.set_window_size(full_page_width, full_page_height)
+
+driver.execute_script("arguments[0].scrollIntoView();", proof)
 
 driver.save_screenshot("proof-screenshot.png")
 

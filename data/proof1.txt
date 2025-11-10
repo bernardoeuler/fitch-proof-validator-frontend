@@ -1,0 +1,10 @@
+
+(P>Q)>(~Q>~P)
+NS;P>Q
+NS;~Q
+NS;P;
+NL;Q;>E1,3
+NL;XX;XXI2,4
+FL;~P;~I3-5
+FL;~Q>~P;>I2-6
+FL;(P>Q)>(~Q>~P);>I1-7

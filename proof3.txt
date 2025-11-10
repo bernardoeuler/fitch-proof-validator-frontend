@@ -1,0 +1,6 @@
+A>B;B>C
+A>C
+NS;A
+NL;B;>E1,3
+NL;C;>E2,4
+FL;A>C;>I3-5

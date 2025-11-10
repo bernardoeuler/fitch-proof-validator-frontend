@@ -4,7 +4,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
-with open("data/proof4.txt", "r") as file:
+file_name = input("Enter the proof file path (e.g. data/proof1.txt): ")
+
+with open(file_name, "r") as file:
     lines = file.readlines()
     premises = lines[0].strip().split(";") if lines[0].strip() != "" else []
     conclusion = lines[1].strip()
@@ -39,18 +41,20 @@ WebDriverWait(driver, 30).until(
 result = driver.find_element(By.CLASS_NAME, "resultsdiv").text
 proof = driver.find_element(By.ID, "theproof")
 
+if result == "☺ Congratulations! This proof is correct.":
+    print("\033[32mProof is correct!\033[0m")
+    additional_height = 0
+else:   
+    print("\033[31mProof is incorrect!\033[0m")
+    print("Explanation:", "\n".join(result.splitlines()[1:]), sep="\n")
+    additional_height = 300
+
 full_page_height = proof.get_property('scrollHeight')
 full_page_width = proof.get_property('scrollWidth')
-driver.set_window_size(full_page_width, full_page_height)
+driver.set_window_size(full_page_width, full_page_height + additional_height)
 
 driver.execute_script("arguments[0].scrollIntoView();", proof)
 
 driver.save_screenshot("proof-screenshot.png")
-
-if result == "☺ Congratulations! This proof is correct.":
-    print("\033[32mProof is correct!\033[0m")
-else:   
-    print("\033[31mProof is incorrect!\033[0m")
-    print("Explanation:", "\n".join(result.splitlines()[1:]), sep="\n")
 
 driver.quit()

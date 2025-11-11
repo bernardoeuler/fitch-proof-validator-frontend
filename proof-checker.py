@@ -103,6 +103,15 @@ if st.button("Verificar Prova"):
                 mime="image/png",
                 icon=":material/download:",
             )
+
+        if not submit_file and proof_text:
+            st.download_button(
+                label="Baixar Arquivo da Prova",
+                data=proof_text,
+                file_name="proof.txt",
+                mime="text/plain",
+                icon=":material/download:",
+            )
     except Exception as e:
         st.error("Ocorreu um erro. Verifique o formato da prova e tente novamente.")
         st.stop()

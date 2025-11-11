@@ -1,3 +1,4 @@
+import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
@@ -55,6 +56,6 @@ driver.set_window_size(full_page_width, full_page_height + additional_height)
 
 driver.execute_script("arguments[0].scrollIntoView();", proof)
 
-driver.save_screenshot("proof-screenshot.png")
+driver.get_screenshot_as_file(f"{str(datetime.datetime.now().timestamp()).split('.')[0]}.png")
 
 driver.quit()

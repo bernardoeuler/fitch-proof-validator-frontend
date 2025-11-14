@@ -25,7 +25,7 @@ else:
     proof_text = st.text_area("Insira a prova no formato de texto abaixo", height=200)
 
 if st.button("Verificar Prova"):
-    if True:
+    try:
         if submit_file and uploaded_file is None:
             st.warning("Por favor, envie um arquivo primeiro.")
             st.stop()
@@ -113,6 +113,9 @@ if st.button("Verificar Prova"):
                 mime="text/plain",
                 icon=":material/download:",
             )
+    except Exception as e:
+        st.error("Ocorreu um erro. Verifique o formato da prova e tente novamente.")
+        st.stop()
 
 st.subheader("Formato do Arquivo de Prova")
 st.text("1. A primeira linha deve conter as premissas separadas por ponto e vírgula (;). Se não houver premissas, deixe a linha em branco e vá para a segunda")

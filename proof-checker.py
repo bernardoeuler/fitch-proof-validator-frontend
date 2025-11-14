@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.core.os_manager import ChromeType
 from webdriver_manager.chrome import ChromeDriverManager
 
 def show_proof_result(is_proof_correct: bool):
@@ -51,7 +52,7 @@ if st.button("Verificar Prova"):
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
 
-        service = ChromeService(executable_path=ChromeDriverManager().install())
+        service = ChromeService(executable_path=ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
         driver = webdriver.Chrome(service=service, options=options)
 
         WebDriverWait(driver, 30).until(
@@ -85,7 +86,7 @@ if st.button("Verificar Prova"):
 
         full_page_height = proof.get_property('scrollHeight')
         full_page_width = proof.get_property('scrollWidth')
-        driver.set_window_size(full_page_width, full_page_height + additional_height)
+        driver.set_window_size(full_page_width + 100, full_page_height + additional_height)
 
         driver.execute_script("arguments[0].scrollIntoView();", proof)
 

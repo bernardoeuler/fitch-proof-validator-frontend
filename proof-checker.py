@@ -115,6 +115,7 @@ if st.button("Verificar Prova"):
             )
     except Exception as e:
         st.error("Ocorreu um erro. Verifique o formato da prova e tente novamente.")
+        print("Error :" + e)
         st.stop()
 
 st.subheader("Formato do Arquivo de Prova")
@@ -126,4 +127,5 @@ st.text("5. Comando: NL (Nova linha), NS (Nova subprova), FL (Finaliza subprova 
 st.text("6. Fórmula: Nova fórmula introduzida naquela linha, escrita como no site original")
 st.text("7. Justificativa: Justificativa para a fórmula introduzida, escrita como no site original")
 st.subheader("Exemplo de Arquivo de Prova")
+
 st.code("""A>B;B>C\nA>C\nNS;A\nNL;B;>E1,3\nNL;C;>E2,4\nFL;A>C;>I3-5""", language="plaintext")
